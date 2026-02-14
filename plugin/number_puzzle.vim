@@ -7,7 +7,7 @@ if exists('g:loaded_number_puzzle')
   finish
 endif
 
-import autoload '..\autoload\numberpuzzle.vim'
+import autoload '../autoload/numberpuzzle.vim'
 
 g:loaded_number_puzzle = 1
 
