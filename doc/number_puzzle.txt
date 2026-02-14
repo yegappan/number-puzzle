@@ -1,0 +1,160 @@
+*number_puzzle.txt*  Number Slide Puzzle game for Vim9
+
+Author:  Number Puzzle Plugin
+License: Same terms as Vim itself (see |license|)
+
+==============================================================================
+CONTENTS                                        *number-puzzle-contents*
+
+    1. Introduction ............... |number-puzzle-introduction|
+    2. Installation ............... |number-puzzle-installation|
+    3. Commands ................... |number-puzzle-commands|
+    4. Keys ....................... |number-puzzle-keys|
+    5. How to Play ................ |number-puzzle-how-to-play|
+    6. About ...................... |number-puzzle-about|
+
+==============================================================================
+1. INTRODUCTION                                 *number-puzzle-introduction*
+
+The Number Slide Puzzle plugin provides a classic sliding puzzle game in a
+Vim popup window. The goal is to arrange numbered tiles in order by sliding
+them into the empty space.
+
+The puzzle is displayed in a centered popup window with a 4x4 grid of tiles
+numbered from 1 to 15, with one empty space. Tiles can be moved by using the
+arrow keys to slide adjacent tiles into the empty space.
+
+==============================================================================
+2. INSTALLATION                                 *number-puzzle-installation*
+
+Requirements~
+
+This plugin requires Vim 9.0 or later with Vim9 script support enabled.
+It will not work with Neovim or older versions of Vim.
+
+Manual Installation~
+
+1. Create the plugin directory structure in your Vim configuration:
+
+   For Unix/Linux/macOS: >
+       mkdir -p ~/.vim/pack/plugins/start/number-puzzle
+<
+   For Windows: >
+       mkdir %USERPROFILE%\vimfiles\pack\plugins\start\number-puzzle
+<
+2. Copy the plugin files into the directory:
+
+   Your directory structure should look like this: >
+       number-puzzle/
+       ├── plugin/
+       │   └── number_puzzle.vim
+       ├── autoload/
+       │   └── numberpuzzle.vim
+       └── doc/
+           └── number_puzzle.txt
+<
+3. Generate help tags by running from within Vim: >
+       :helptags ~/.vim/pack/plugins/start/number-puzzle/doc
+<
+   Or on Windows: >
+       :helptags ~/vimfiles/pack/plugins/start/number-puzzle/doc
+<
+Plugin Manager Installation~
+
+If using a plugin manager like vim-plug, add to your .vimrc or init.vim:
+>
+    Plug 'path/to/number-puzzle'
+<
+Then run `:PlugInstall` and `:helptags ALL`
+
+For other plugin managers (Vundle, Pathogen, etc.), follow their standard
+installation procedures for local plugins.
+
+==============================================================================
+3. COMMANDS                                     *number-puzzle-commands*
+
+                                                *:NumberPuzzleStart*
+:NumberPuzzleStart      Opens the number puzzle game in a popup window.
+                        If a puzzle is already open, it resets the puzzle
+                        with a new scrambled configuration.
+
+                                                *:NumberPuzzleReset*
+:NumberPuzzleReset      Resets the current puzzle with a new scrambled
+                        configuration. Only works when a puzzle is open.
+
+==============================================================================
+4. KEYS                                         *number-puzzle-keys*
+
+The following keys are available when the puzzle popup is active:
+
+    <Up>        Move a tile from below the empty space upward
+    <Down>      Move a tile from above the empty space downward
+    <Left>      Move a tile from the right of empty space leftward
+    <Right>     Move a tile from the left of empty space rightward
+
+    r           Reset the puzzle with a new scrambled configuration
+    q           Close the puzzle popup window
+    ?           Display help message in the command line
+
+Note: The arrow keys move tiles INTO the empty space, not the empty space
+itself. For example, pressing <Up> moves the tile below the empty space up.
+
+==============================================================================
+5. HOW TO PLAY                                  *number-puzzle-how-to-play*
+
+Starting the Game~
+
+Use |:NumberPuzzleStart| to open the puzzle in a popup window. The puzzle
+will appear centered on your screen with a scrambled arrangement of tiles.
+
+Objective~
+
+Arrange the numbered tiles in order from 1 to 15, reading left to right,
+top to bottom, with the empty space in the bottom-right corner:
+
+     1 │  2 │  3 │  4
+    ───┼────┼────┼────
+     5 │  6 │  7 │  8
+    ───┼────┼────┼────
+     9 │ 10 │ 11 │ 12
+    ───┼────┼────┼────
+    13 │ 14 │ 15 │   
+
+Moving Tiles~
+
+Use the arrow keys to slide tiles adjacent to the empty space:
+- Only tiles directly adjacent (horizontally or vertically) to the empty
+  space can be moved
+- Press the arrow key pointing FROM the empty space TOWARD the tile you
+  want to move
+- The tile will slide into the empty space
+
+Strategy Tips~
+
+- Plan multiple moves ahead to avoid getting stuck
+- Try to solve row by row, starting from the top
+- The last two tiles in each row often require special techniques
+- All generated puzzles are guaranteed to be solvable
+
+Winning~
+
+When all tiles are arranged in the correct order, you'll see a success
+message: "Solved! Press r to reset or q to quit."
+
+==============================================================================
+6. ABOUT                                        *number-puzzle-about*
+
+The Number Slide Puzzle (also known as the 15-puzzle) is a classic sliding
+puzzle that consists of a frame of numbered square tiles in random order with
+one tile missing.
+
+This implementation uses Vim9 script features including:
+- Classes and interfaces for object-oriented design
+- Enums for direction types
+- Type annotations for type safety
+- Popup windows for a modern UI
+
+The puzzle generation algorithm ensures that every generated puzzle is
+solvable by checking the inversion count and empty tile position.
+
+vim:tw=78:ts=8:ft=help:norl:
