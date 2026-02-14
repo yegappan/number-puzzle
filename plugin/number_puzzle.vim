@@ -11,5 +11,4 @@ import autoload '..\autoload\numberpuzzle.vim'
 
 g:loaded_number_puzzle = 1
 
-command! NumberPuzzleStart numberpuzzle.Start()
-command! NumberPuzzleReset numberpuzzle.Reset()
+command! NumberPuzzle numberpuzzle.Start()

@@ -46,12 +46,22 @@ Manual Installation~
 
    Your directory structure should look like this: >
        number-puzzle/
-       ├── plugin/
-       │   └── number_puzzle.vim
-       ├── autoload/
-       │   └── numberpuzzle.vim
-       └── doc/
-           └── number_puzzle.txt
+        plugin/
+           number_puzzle.vim
+        autoload/
+           numberpuzzle.vim
+           numberpuzzle/
+               board.vim
+               constants.vim
+               game.vim
+               position.vim
+               renderer.vim
+               types.vim
+               view.vim
+        doc/
+           number_puzzle.txt
+        LICENSE
+        README.md
 <
 3. Generate help tags by running from within Vim: >
        :helptags ~/.vim/pack/plugins/start/number-puzzle/doc
@@ -73,14 +83,10 @@ installation procedures for local plugins.
 ==============================================================================
 3. COMMANDS                                     *number-puzzle-commands*
 
-                                                *:NumberPuzzleStart*
-:NumberPuzzleStart      Opens the number puzzle game in a popup window.
+                                                *:NumberPuzzle*
+:NumberPuzzle      Opens the number puzzle game in a popup window.
                         If a puzzle is already open, it resets the puzzle
                         with a new scrambled configuration.
-
-                                                *:NumberPuzzleReset*
-:NumberPuzzleReset      Resets the current puzzle with a new scrambled
-                        configuration. Only works when a puzzle is open.
 
 ==============================================================================
 4. KEYS                                         *number-puzzle-keys*
@@ -104,7 +110,7 @@ itself. For example, pressing <Up> moves the tile below the empty space up.
 
 Starting the Game~
 
-Use |:NumberPuzzleStart| to open the puzzle in a popup window. The puzzle
+Use |:NumberPuzzle| to open the puzzle in a popup window. The puzzle
 will appear centered on your screen with a scrambled arrangement of tiles.
 
 Objective~
@@ -112,13 +118,13 @@ Objective~
 Arrange the numbered tiles in order from 1 to 15, reading left to right,
 top to bottom, with the empty space in the bottom-right corner:
 
-     1 │  2 │  3 │  4
-    ───┼────┼────┼────
-     5 │  6 │  7 │  8
-    ───┼────┼────┼────
-     9 │ 10 │ 11 │ 12
-    ───┼────┼────┼────
-    13 │ 14 │ 15 │   
+     1   2   3   4
+
+     5   6   7   8
+
+     9  10  11  12
+
+    13  14  15    
 
 Moving Tiles~
 
@@ -148,11 +154,31 @@ The Number Slide Puzzle (also known as the 15-puzzle) is a classic sliding
 puzzle that consists of a frame of numbered square tiles in random order with
 one tile missing.
 
-This implementation uses Vim9 script features including:
-- Classes and interfaces for object-oriented design
-- Enums for direction types
-- Type annotations for type safety
+Architecture~
+
+This implementation uses a highly modular architecture with separate concerns:
+
+- constants.vim:    Centralized constant definitions
+- types.vim:        Type aliases and enums (Board, Pos, Index, Dir, GameState)
+- position.vim:     Position/index calculations and movement logic
+- renderer.vim:     Board-to-display conversion
+- board.vim:        Board class for state management and validation
+- game.vim:         Puzzle class for game logic and state
+- view.vim:         View interface and popup implementation
+- numberpuzzle.vim: Main coordinator and key handling
+
+Vim9 Script Features~
+
+This implementation uses modern Vim9 script features including:
+- Classes (Board, Puzzle, PopupView) for object-oriented design
+- Interface (IPuzzleView) for view abstraction
+- Enums for type-safe direction (Dir) and state (GameState) handling
+- Type aliases (Board, Pos, Index, CellValue) for code clarity
+- Full type annotations throughout for type safety
+- Export/import system for clean module separation
 - Popup windows for a modern UI
+
+Algorithm~
 
 The puzzle generation algorithm ensures that every generated puzzle is
 solvable by checking the inversion count and empty tile position.

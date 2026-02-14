@@ -9,6 +9,7 @@ The Number Slide Puzzle plugin provides an interactive sliding puzzle game direc
 ### Features
 
 - **Modern Vim9 Implementation**: Built with Vim9 script features including classes, interfaces, enums, and type annotations
+- **Highly Modular Architecture**: Clean separation of concerns across multiple specialized modules
 - **Popup Window Interface**: Non-intrusive gameplay in a centered popup window
 - **Unicode Box Drawing**: Clear visual separation between tiles using Unicode characters
 - **Guaranteed Solvable**: Every generated puzzle is verified to be solvable using mathematical validation
@@ -48,9 +49,18 @@ The Number Slide Puzzle plugin provides an interactive sliding puzzle game direc
    ├── plugin/
    │   └── number_puzzle.vim
    ├── autoload/
-   │   └── numberpuzzle.vim
+   │   ├── numberpuzzle.vim
+   │   └── numberpuzzle/
+   │       ├── board.vim
+   │       ├── constants.vim
+   │       ├── game.vim
+   │       ├── position.vim
+   │       ├── renderer.vim
+   │       ├── types.vim
+   │       └── view.vim
    ├── doc/
    │   └── number_puzzle.txt
+   ├── LICENSE
    └── README.md
    ```
 
@@ -91,8 +101,7 @@ For Vundle, Pathogen, or other plugin managers, follow their standard installati
 
 | Command | Description |
 |---------|-------------|
-| `:NumberPuzzleStart` | Start a new game or reset if already open |
-| `:NumberPuzzleReset` | Reset the current puzzle with a new configuration |
+| `:NumberPuzzle` | Start a new game or reset if already open |
 
 ### Keyboard Controls
 
@@ -114,7 +123,7 @@ When the puzzle popup is active:
 
 1. **Start the game:**
    ```vim
-   :NumberPuzzleStart
+   :NumberPuzzle
    ```
 
 2. **Objective:**
@@ -161,15 +170,35 @@ Browse available help topics:
 
 ## Technical Details
 
+### Architecture
+
+The plugin is organized into highly modular components:
+
+- **constants.vim**: Centralized constant definitions (EMPTY, drawing characters, defaults)
+- **types.vim**: Type aliases (`Board`, `Pos`, `Index`, `CellValue`) and enums (`Dir`, `GameState`)
+- **position.vim**: Position and index calculations, adjacency checks, movement logic
+- **renderer.vim**: Board-to-display conversion and rendering logic
+- **board.vim**: `Board` class encapsulating board state, generation, and validation
+- **game.vim**: `Puzzle` class managing game state and move logic
+- **view.vim**: `IPuzzleView` interface and `PopupView` class for UI rendering
+- **numberpuzzle.vim**: Main coordinator for game initialization and key handling
+
+### Vim9 Script Features
+
 This plugin showcases modern Vim9 script features:
 
-- **Classes & Interfaces**: Object-oriented design with `Puzzle` and `PopupView` classes
-- **Enums**: Type-safe direction handling with `Dir` enum
-- **Type Annotations**: Full type safety with `Board`, `Pos`, and other custom types
-- **Export System**: Clean separation between plugin and autoload with explicit exports
+- **Classes**: Object-oriented design with `Board`, `Puzzle`, and `PopupView` classes
+- **Interfaces**: `IPuzzleView` interface for view abstraction
+- **Enums**: Type-safe enums for `Dir` (movement directions) and `GameState`
+- **Type Aliases**: Custom types like `Board`, `Pos`, `Index`, and `CellValue` for clarity
+- **Type Annotations**: Full type safety throughout with explicit type declarations
+- **Export System**: Clean module separation with explicit imports and exports
 - **Popup Windows**: Modern UI using Vim's popup window API
+- **Constants**: Centralized constant definitions for maintainability
 
-The puzzle generation algorithm ensures solvability by checking the inversion count and empty tile position according to the mathematical properties of the 15-puzzle.
+### Algorithm
+
+The puzzle generation algorithm ensures solvability by checking the inversion count and empty tile position according to the mathematical properties of the 15-puzzle. The Fisher-Yates shuffle algorithm provides fair randomization while maintaining solvability guarantees.
 
 
 ## Contributing
