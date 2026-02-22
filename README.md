@@ -26,13 +26,13 @@ You can install this plugin directly from github using the following steps:
 
    **Unix/Linux/macOS:**
    ```bash
-   git clone https://github.com/yegappan/number-puzzle $HOME/.vim/pack/downloads/opt/number-puzzle
+   git clone https://github.com/yegappan/number-puzzle.git $HOME/.vim/pack/downloads/opt/number-puzzle
    vim -u NONE -c "helptags $HOME/.vim/pack/downloads/opt/number-puzzle/doc" -c q
    ```
 
    **Windows:**
    ```cmd
-   git clone https://github.com/yegappan/number-puzzle %USERPROFILE%\vimfiles\pack\downloads\opt\number-puzzle
+   git clone https://github.com/yegappan/number-puzzle.git %USERPROFILE%\vimfiles\pack\downloads\opt\number-puzzle
    vim -u NONE -c "helptags $HOME/vimfiles/pack/downloads/opt/number-puzzle/doc" -c q
    ```
 
