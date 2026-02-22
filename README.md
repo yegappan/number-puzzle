@@ -22,78 +22,28 @@ The Number Slide Puzzle plugin provides an interactive sliding puzzle game direc
 
 ## Installation
 
-### Manual Installation
-
-1. Create the plugin directory structure:
+You can install this plugin directly from github using the following steps:
 
    **Unix/Linux/macOS:**
    ```bash
-   mkdir -p ~/.vim/pack/plugins/start/number-puzzle
+   git clone https://github.com/yegappan/number-puzzle $HOME/.vim/pack/downloads/opt/number-puzzle
+   vim -u NONE -c "helptags $HOME/.vim/pack/downloads/opt/number-puzzle/doc" -c q
    ```
 
    **Windows:**
    ```cmd
-   mkdir %USERPROFILE%\vimfiles\pack\plugins\start\number-puzzle
+   git clone https://github.com/yegappan/number-puzzle %USERPROFILE%\vimfiles\pack\downloads\opt\number-puzzle
+   vim -u NONE -c "helptags $HOME/vimfiles/pack/downloads/opt/number-puzzle/doc" -c q
    ```
 
-2. Clone or copy the plugin files into the directory:
+After installing the plugin using the above steps, add the following line to
+the $HOME/.vimrc (Unix/Linux/macOS) or the $HOME/_vimrc (Windows) file:
 
-   ```bash
-   cd ~/.vim/pack/plugins/start/
-   git clone https://github.com/yourusername/number-puzzle.git
-   ```
-
-   Your directory structure should look like:
-   ```
-   number-puzzle/
-   ├── plugin/
-   │   └── number_puzzle.vim
-   ├── autoload/
-   │   ├── numberpuzzle.vim
-   │   └── numberpuzzle/
-   │       ├── board.vim
-   │       ├── constants.vim
-   │       ├── game.vim
-   │       ├── position.vim
-   │       ├── renderer.vim
-   │       ├── types.vim
-   │       └── view.vim
-   ├── doc/
-   │   └── number_puzzle.txt
-   ├── LICENSE
-   └── README.md
-   ```
-
-3. Generate help tags from within Vim:
-
-   ```vim
-   :helptags ~/.vim/pack/plugins/start/number-puzzle/doc
-   ```
-
-   Or on Windows:
-   ```vim
-   :helptags ~/vimfiles/pack/plugins/start/number-puzzle/doc
-   ```
-
-### Plugin Manager Installation
-
-#### vim-plug
-
-Add to your `.vimrc` or `init.vim`:
-
-```vim
-Plug 'yourusername/number-puzzle'
+```viml
+packadd number-puzzle
 ```
 
-Then run:
-```vim
-:PlugInstall
-:helptags ALL
-```
-
-#### Other Plugin Managers
-
-For Vundle, Pathogen, or other plugin managers, follow their standard installation procedures.
+You can also install and manage this plugin using any one of the Vim plugin managers (dein.vim, pathogen, vam, vim-plug, volt, Vundle, etc.).
 
 ## Usage
 
