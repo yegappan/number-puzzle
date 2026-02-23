@@ -15,13 +15,14 @@ CONTENTS                                            *number-puzzle-contents*
 ================================================================================
 1. INTRODUCTION                                    *number-puzzle-intro*
 
-The Number Slide Puzzle (also known as the 15-puzzle) is a classic sliding
+The Number Slide Puzzle (also known as the N-puzzle) is a classic sliding
 puzzle implemented in Vim9script. Rearrange numbered tiles by sliding them into
 the empty space until they're in the correct numerical order.
 
-The puzzle is displayed in a centered popup window with a 4x4 grid containing
-tiles numbered 1-15 and one empty space. This modular implementation showcases
-modern Vim9 features including classes, interfaces, enums, and type safety.
+The puzzle is displayed in a centered popup window with support for three grid
+sizes: 3×3 (8-puzzle with 8 tiles), 4×4 (15-puzzle with 15 tiles, default),
+and 5×5 (24-puzzle with 24 tiles). This modular implementation showcases modern
+Vim9 features including classes, interfaces, enums, and type safety.
 
 ================================================================================
 2. INSTALLATION                                    *number-puzzle-install*
@@ -103,9 +104,22 @@ installation procedures for local plugins.
 ================================================================================
 3. COMMANDS                                       *number-puzzle-commands*
 
-:NumberPuzzle
-    Opens the number puzzle game in a popup window. If a puzzle is already
-    open, resets the puzzle with a new scrambled configuration.
+:NumberPuzzle [size]~
+Start a new number slide puzzle game in a popup window with the specified grid
+size. If a game is already running, this command will reset the current puzzle.
+Valid sizes are 3, 4 (default), or 5.
+
+Usage~
+
+    Start a 4×4 puzzle (default): >
+      :NumberPuzzle
+<
+    Start a 3×3 puzzle: >
+      :NumberPuzzle 3
+<
+    Start a 5×5 puzzle: >
+      :NumberPuzzle 5
+<
 
 ================================================================================
 4. CONTROLS                                        *number-puzzle-controls*
@@ -129,13 +143,29 @@ Game Control:
 5. GAME RULES                                      *number-puzzle-rules*
 
 Objective~
-Arrange the numbered tiles in order from 1 to 15, reading left to right, top
-to bottom, with the empty space in the bottom-right corner:
+Arrange the numbered tiles in order (1 through N), reading left to right, top
+to bottom, with the empty space in the bottom-right corner.
 
-     1   2   3   4
-     5   6   7   8
-     9  10  11  12
-    13  14  15   
+For a 3×3 puzzle: >
+   1   2   3
+   4   5   6
+   7   8
+<
+
+For a 4×4 puzzle: >
+   1   2   3   4
+   5   6   7   8
+   9  10  11  12
+  13  14  15
+<
+
+For a 5×5 puzzle: >
+   1   2   3   4   5
+   6   7   8   9  10
+  11  12  13  14  15
+  16  17  18  19  20
+  21  22  23  24
+<
 
 How to Play~
 1. Start with the tiles in a scrambled arrangement
@@ -151,7 +181,7 @@ All tiles are arranged in correct numerical order with the empty space in the
 bottom-right corner.
 
 Puzzle Solvability~
-All generated puzzles are guaranteed to be solvable (not all random 
+All generated puzzles are guaranteed to be solvable (not all random
 configurations are solvable due to permutation parity).
 
 ================================================================================

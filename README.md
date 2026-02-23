@@ -5,8 +5,8 @@ A classic 15-puzzle sliding tile game where you arrange numbered tiles in order 
 ## Features
 
 - **Guaranteed Solvable**: Every puzzle is verified solvable using mathematical validation
-- **4×4 Grid**: 15 numbered tiles plus one empty space
-- **Arrow Key Controls**: Intuitive tile movement
+- **Multiple Grid Sizes**: 3×3, 4×4 (default), and 5×5 puzzles
+- **Vim-style Controls**: Arrow keys or hjkl for tile movement
 - **Popup Window UI**: Non-intrusive gameplay in a centered window
 - **Puzzle Reset**: Generate new scrambled configurations
 - **Modern Vim9script**: Demonstrates OOP principles and modular design
@@ -84,8 +84,19 @@ For other plugin managers, follow their standard procedure for local plugins.
 
 ### Starting the Game
 
+Start a 4×4 puzzle (default):
 ```vim
 :NumberPuzzle
+```
+
+Start a 3×3 puzzle:
+```vim
+:NumberPuzzle 3
+```
+
+Start a 5×5 puzzle:
+```vim
+:NumberPuzzle 5
 ```
 
 ### Controls

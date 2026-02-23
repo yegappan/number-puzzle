@@ -11,10 +11,21 @@ import './numberpuzzle/view.vim'
 var popup_id: number = 0
 var current_game: any = null_object
 var current_view: any = null_object
+var current_size: number = constants.DEFAULT_SIZE
 
 
 # Start a new puzzle game or reset if already running.
-export def Start()
+export def Start(size: number = constants.DEFAULT_SIZE)
+  # Validate puzzle size
+  if size < 3 || size > 5
+    echohl ErrorMsg
+    echo 'Error: Puzzle size must be 3, 4, or 5'
+    echohl None
+    return
+  endif
+
+  current_size = size
+
   # Reuse current popup if it is already open.
   if current_view != null_object && current_view.IsOpen()
     Reset()
@@ -22,12 +33,25 @@ export def Start()
   endif
 
   current_view = view.PopupView.new()
-  current_game = game.Puzzle.new(constants.DEFAULT_SIZE, current_view)
+  current_game = game.Puzzle.new(size, current_view)
 
   # Set up popup with filter and callback
   SetupPopup()
 
   RenderGame()
+enddef
+
+
+# Wrapper function to handle command-line arguments.
+export def StartGame(...args: list<any>)
+  var size = constants.DEFAULT_SIZE
+  if len(args) > 0
+    var size_arg = args[0]
+    if !empty(size_arg)
+      size = str2nr(size_arg)
+    endif
+  endif
+  Start(size)
 enddef
 
 
@@ -75,7 +99,8 @@ enddef
 
 # Display help message.
 export def Help()
-  echo "Number Puzzle: use arrow keys (↑↓←→) or hjkl to move tiles; press r to reset or q to close."
+  var size_str = 'Current size: ' .. current_size .. 'x' .. current_size
+  echo "Number Puzzle (" .. size_str .. "): arrow keys/hjkl to move, r to reset, q to close"
 enddef
 
 
