@@ -1,31 +1,30 @@
-*number_puzzle.txt*  Number Slide Puzzle game for Vim9
+*number_puzzle.txt*  Number Slide Puzzle for Vim9
 
-Author:  Number Puzzle Plugin
-License: Same terms as Vim itself (see |license|)
+================================================================================
+CONTENTS                                            *number-puzzle-contents*
 
-==============================================================================
-CONTENTS                                        *number-puzzle-contents*
+  1. Introduction .......................... |number-puzzle-intro|
+  2. Installation .......................... |number-puzzle-install|
+  3. Commands ............................. |number-puzzle-commands|
+  4. Controls ............................. |number-puzzle-controls|
+  5. Game Rules ........................... |number-puzzle-rules|
+  6. Strategy Tips ........................ |number-puzzle-strategy|
+  7. Configuration ........................ |number-puzzle-config|
+  8. Vim9 Script Features ................. |number-puzzle-vim9|
 
-    1. Introduction ............... |number-puzzle-introduction|
-    2. Installation ............... |number-puzzle-installation|
-    3. Commands ................... |number-puzzle-commands|
-    4. Keys ....................... |number-puzzle-keys|
-    5. How to Play ................ |number-puzzle-how-to-play|
-    6. About ...................... |number-puzzle-about|
+================================================================================
+1. INTRODUCTION                                    *number-puzzle-intro*
 
-==============================================================================
-1. INTRODUCTION                                 *number-puzzle-introduction*
+The Number Slide Puzzle (also known as the 15-puzzle) is a classic sliding
+puzzle implemented in Vim9script. Rearrange numbered tiles by sliding them into
+the empty space until they're in the correct numerical order.
 
-The Number Slide Puzzle plugin provides a classic sliding puzzle game in a
-Vim popup window. The goal is to arrange numbered tiles in order by sliding
-them into the empty space.
+The puzzle is displayed in a centered popup window with a 4x4 grid containing
+tiles numbered 1-15 and one empty space. This modular implementation showcases
+modern Vim9 features including classes, interfaces, enums, and type safety.
 
-The puzzle is displayed in a centered popup window with a 4x4 grid of tiles
-numbered from 1 to 15, with one empty space. Tiles can be moved by using the
-arrow keys to slide adjacent tiles into the empty space.
-
-==============================================================================
-2. INSTALLATION                                 *number-puzzle-installation*
+================================================================================
+2. INSTALLATION                                    *number-puzzle-install*
 
 Requirements~
 
@@ -101,103 +100,145 @@ Then run `:PlugInstall` and `:helptags ALL`
 For other plugin managers (Vundle, Pathogen, etc.), follow their standard
 installation procedures for local plugins.
 
-==============================================================================
-3. COMMANDS                                     *number-puzzle-commands*
+================================================================================
+3. COMMANDS                                       *number-puzzle-commands*
 
-                                                *:NumberPuzzle*
-:NumberPuzzle      Opens the number puzzle game in a popup window.
-                        If a puzzle is already open, it resets the puzzle
-                        with a new scrambled configuration.
+:NumberPuzzle
+    Opens the number puzzle game in a popup window. If a puzzle is already
+    open, resets the puzzle with a new scrambled configuration.
 
-==============================================================================
-4. KEYS                                         *number-puzzle-keys*
+================================================================================
+4. CONTROLS                                        *number-puzzle-controls*
 
-The following keys are available when the puzzle popup is active:
-
-    <Up>        Move a tile from below the empty space upward
-    <Down>      Move a tile from above the empty space downward
-    <Left>      Move a tile from the right of empty space leftward
-    <Right>     Move a tile from the left of empty space rightward
-
-    r           Reset the puzzle with a new scrambled configuration
-    q           Close the puzzle popup window
-    ?           Display help message in the command line
+Movement and Tile Selection:
+  <Up>            Move a tile from below the empty space upward
+  <Down>          Move a tile from above the empty space downward
+  <Left>          Move a tile from the right of empty space leftward
+  <Right>         Move a tile from the left of empty space rightward
 
 Note: The arrow keys move tiles INTO the empty space, not the empty space
-itself. For example, pressing <Up> moves the tile below the empty space up.
+itself. For example, pressing <Up> moves the tile below the empty space up
+into the empty space.
 
-==============================================================================
-5. HOW TO PLAY                                  *number-puzzle-how-to-play*
+Game Control:
+  r               Reset the puzzle with a new scrambled configuration
+  q               Close the puzzle popup window
+  ?               Display help message in the command line
 
-Starting the Game~
-
-Use |:NumberPuzzle| to open the puzzle in a popup window. The puzzle
-will appear centered on your screen with a scrambled arrangement of tiles.
+================================================================================
+5. GAME RULES                                      *number-puzzle-rules*
 
 Objective~
-
-Arrange the numbered tiles in order from 1 to 15, reading left to right,
-top to bottom, with the empty space in the bottom-right corner:
+Arrange the numbered tiles in order from 1 to 15, reading left to right, top
+to bottom, with the empty space in the bottom-right corner:
 
      1   2   3   4
-
      5   6   7   8
-
      9  10  11  12
+    13  14  15   
 
-    13  14  15    
+How to Play~
+1. Start with the tiles in a scrambled arrangement
+2. Only tiles directly adjacent (horizontally or vertically) to the empty
+   space can be moved
+3. Press the arrow key pointing FROM the empty space TOWARD the tile you
+   want to move
+4. The tile will slide into the empty space
+5. Continue sliding tiles until they're in numerical order
 
-Moving Tiles~
+Win Condition~
+All tiles are arranged in correct numerical order with the empty space in the
+bottom-right corner.
 
-Use the arrow keys to slide tiles adjacent to the empty space:
-- Only tiles directly adjacent (horizontally or vertically) to the empty
-  space can be moved
-- Press the arrow key pointing FROM the empty space TOWARD the tile you
-  want to move
-- The tile will slide into the empty space
+Puzzle Solvability~
+All generated puzzles are guaranteed to be solvable (not all random 
+configurations are solvable due to permutation parity).
 
-Strategy Tips~
+================================================================================
+6. STRATEGY TIPS                                   *number-puzzle-strategy*
 
+General Approach~
 - Plan multiple moves ahead to avoid getting stuck
-- Try to solve row by row, starting from the top
+- Solve row by row, starting from the top left
 - The last two tiles in each row often require special techniques
-- All generated puzzles are guaranteed to be solvable
 
-Winning~
+Top Row Completion~
+1. Get tile 1 in place first
+2. Solve positions for tiles 2, 3, 4 in the top row
+3. Use the second row to maneuver into perfect positions
 
-When all tiles are arranged in the correct order, you'll see a success
-message: "Solved! Press r to reset or q to quit."
+Middle Rows~
+- Follow the same row-by-row approach
+- Preserve already-completed tiles
+- Move thoughtfully to avoid disrupting solved sections
 
-==============================================================================
-6. ABOUT                                        *number-puzzle-about*
+Last Two Tiles~
+- The final positioning of tiles 14 and 15 requires special sequencing
+- If you end up with only these two tiles swapped, you may need to restart
+  as this configuration is unsolvable from certain permutations
 
-The Number Slide Puzzle (also known as the 15-puzzle) is a classic sliding
-puzzle that consists of a frame of numbered square tiles in random order with
-one tile missing.
+================================================================================
+7. CONFIGURATION                                   *number-puzzle-config*
+
+The Number Puzzle plugin has minimal configuration. Most settings are
+fixed by the standard 15-puzzle rules:
+
+  • Grid size: Always 4x4
+  • Tile count: 15 tiles + 1 empty space
+  • Shuffle depth: Configurable number of random moves
+
+Gameplay Settings~
+
+Current configuration (hardcoded but easily customizable):
+  • Solvable puzzles guaranteed (inversion count validated)
+  • Movement arrows correspond to moving FROM empty space
+  • Animation: Tiles slide smoothly to new positions
+  • No move history/undo available
+  • No move counter (puzzle itself is challenge)
+
+Potential Future Configuration~
+The modular architecture could support:
+  • Different grid sizes (3x3, 5x5)
+  • Variable shuffle depths
+  • Timer modes (speedrun challenges)
+  • Move counting and tracking
+  • Custom color schemes
+
+================================================================================
+8. VIM9 SCRIPT FEATURES                           *number-puzzle-vim9*
+
+This plugin demonstrates several modern Vim9script capabilities:
 
 Architecture~
+The implementation uses a highly modular architecture with clear separation
+of concerns:
 
-This implementation uses a highly modular architecture with separate concerns:
+  • constants.vim: Centralized constant definitions
+  • types.vim: Type aliases and enums (Board, Pos, Index, Dir, GameState)
+  • position.vim: Position/index calculations and movement logic
+  • renderer.vim: Board-to-display conversion
+  • board.vim: Board class for state management and validation
+  • game.vim: Puzzle class for game logic and state
+  • view.vim: View interface and popup implementation
+  • numberpuzzle.vim: Main coordinator and key handling
 
-- constants.vim:    Centralized constant definitions
-- types.vim:        Type aliases and enums (Board, Pos, Index, Dir, GameState)
-- position.vim:     Position/index calculations and movement logic
-- renderer.vim:     Board-to-display conversion
-- board.vim:        Board class for state management and validation
-- game.vim:         Puzzle class for game logic and state
-- view.vim:         View interface and popup implementation
-- numberpuzzle.vim: Main coordinator and key handling
+Vim9 Features Used~
+  • Classes (Board, Puzzle, PopupView) for object-oriented design
+  • Interface (IPuzzleView) for view abstraction
+  • Enums for type-safe direction (Dir) and state (GameState) handling
+  • Type aliases (Board, Pos, Index, CellValue) for code clarity
+  • Full type annotations throughout for type safety
+  • Export/import system for clean module separation
+  • Popup windows for a modern UI
 
-Vim9 Script Features~
+Design Patterns~
+  • Singleton pattern for game instance management
+  • Model-View separation for clean architecture
+  • Interface-based design for loose coupling and testability
 
-This implementation uses modern Vim9 script features including:
-- Classes (Board, Puzzle, PopupView) for object-oriented design
-- Interface (IPuzzleView) for view abstraction
-- Enums for type-safe direction (Dir) and state (GameState) handling
-- Type aliases (Board, Pos, Index, CellValue) for code clarity
-- Full type annotations throughout for type safety
-- Export/import system for clean module separation
-- Popup windows for a modern UI
+================================================================================
+
+vim:tw=78:ts=8:ft=help:norl:
 
 Algorithm~
 
