@@ -32,42 +32,63 @@ Requirements~
 This plugin requires Vim 9.0 or later with Vim9 script support enabled.
 It will not work with Neovim or older versions of Vim.
 
-Manual Installation~
+Installation~
 
-1. Create the plugin directory structure in your Vim configuration:
+Using Git~
+If you have git installed, run the following command in your terminal:
 
-   For Unix/Linux/macOS: >
-       mkdir -p ~/.vim/pack/plugins/start/number-puzzle
+    Unix/Linux/macOS: >
+      git clone https://github.com/yegappan/number-puzzle.git ~/.vim/pack/downloads/opt/number-puzzle
 <
-   For Windows: >
-       mkdir %USERPROFILE%\vimfiles\pack\plugins\start\number-puzzle
+    Windows (cmd.exe): >
+      git clone https://github.com/yegappan/number-puzzle.git %USERPROFILE%\vimfiles\pack\downloads\opt\number-puzzle
 <
-2. Copy the plugin files into the directory:
+Using a ZIP file~
+If you prefer not to use Git:
 
-   Your directory structure should look like this: >
-       number-puzzle/
-        plugin/
-           number_puzzle.vim
-        autoload/
-           numberpuzzle.vim
-           numberpuzzle/
-               board.vim
-               constants.vim
-               game.vim
-               position.vim
-               renderer.vim
-               types.vim
-               view.vim
-        doc/
-           number_puzzle.txt
-        LICENSE
-        README.md
+    Unix/Linux/macOS:
+    1. Create the destination directory: >
+
+	 mkdir -p ~/.vim/pack/downloads/opt/
 <
-3. Generate help tags by running from within Vim: >
-       :helptags ~/.vim/pack/plugins/start/number-puzzle/doc
+    2. Download the plugin ZIP file from GitHub and extract its contents into
+       the directory created above.
+
+       *Note:* GitHub usually names the extracted folder number-puzzle-main.
+       Rename it to number-puzzle so the final path looks like this: >
+
+	 ~/.vim/pack/downloads/opt/number-puzzle/
+	 ├── plugin/
+	 ├── autoload/
+	 └── doc/
 <
-   Or on Windows: >
-       :helptags ~/vimfiles/pack/plugins/start/number-puzzle/doc
+    Windows (cmd.exe):
+    1. Create the destination directory: >
+
+	 if not exist "%USERPROFILE%\vimfiles\pack\downloads\opt" mkdir "%USERPROFILE%\vimfiles\pack\downloads\opt"
+<
+    2. Download the plugin ZIP file from GitHub and extract its contents into
+       that directory.
+
+       *Note:* Rename the extracted folder (usually number-puzzle-main) to
+       number-puzzle so the path matches: >
+
+	 %USERPROFILE%\vimfiles\pack\downloads\opt\number-puzzle\
+	 ├── plugin/
+	 ├── autoload/
+	 └── doc/
+
+Finalizing Setup~
+Since this plugin is installed in the opt (optional) directory, it will not
+load automatically. Add the following line to your .vimrc (Unix) or _vimrc
+(Windows): >
+
+    packadd number-puzzle
+<
+After adding the line, restart Vim and run the following command to enable the
+help documentation: >
+
+    :helptags ALL
 <
 Plugin Manager Installation~
 

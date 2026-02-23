@@ -22,28 +22,86 @@ The Number Slide Puzzle plugin provides an interactive sliding puzzle game direc
 
 ## Installation
 
-You can install this plugin directly from github using the following steps:
+### Using Git
+If you have git installed, run the following command in your terminal:
 
-   **Unix/Linux/macOS:**
-   ```bash
-   git clone https://github.com/yegappan/number-puzzle.git $HOME/.vim/pack/downloads/opt/number-puzzle
-   vim -u NONE -c "helptags $HOME/.vim/pack/downloads/opt/number-puzzle/doc" -c q
-   ```
+**Unix/Linux/macOS:**
 
-   **Windows:**
-   ```cmd
-   git clone https://github.com/yegappan/number-puzzle.git %USERPROFILE%\vimfiles\pack\downloads\opt\number-puzzle
-   vim -u NONE -c "helptags $HOME/vimfiles/pack/downloads/opt/number-puzzle/doc" -c q
-   ```
+```bash
+git clone https://github.com/yegappan/number-puzzle.git ~/.vim/pack/downloads/opt/number-puzzle
+```
+**Windows (cmd.exe):**
 
-After installing the plugin using the above steps, add the following line to
-the $HOME/.vimrc (Unix/Linux/macOS) or the $HOME/_vimrc (Windows) file:
+```cmd
+git clone https://github.com/yegappan/number-puzzle.git %USERPROFILE%\vimfiles\pack\downloads\opt\number-puzzle
+```
+
+### Using a ZIP file
+If you prefer not to use Git:
+
+**Unix/Linux/macOS:**
+
+Create the destination directory:
+
+```bash
+mkdir -p ~/.vim/pack/downloads/opt/
+```
+
+Download the plugin ZIP file from GitHub and extract its contents into the directory created above.
+
+*Note:* GitHub usually names the extracted folder number-puzzle-main. Rename it to number-puzzle so the final path looks like this:
+
+```plaintext
+~/.vim/pack/downloads/opt/number-puzzle/
+├── plugin/
+├── autoload/
+└── doc/
+```
+
+**Windows (cmd.exe):**
+
+Create the destination directory:
+
+```cmd
+if not exist "%USERPROFILE%\vimfiles\pack\downloads\opt" mkdir "%USERPROFILE%\vimfiles\pack\downloads\opt"
+```
+
+Download the plugin ZIP file from GitHub and extract its contents into that directory.
+
+*Note:* Rename the extracted folder (usually number-puzzle-main) to number-puzzle so the path matches:
+
+```plaintext
+%USERPROFILE%\vimfiles\pack\downloads\opt\number-puzzle\
+├── plugin/
+├── autoload/
+└── doc/
+```
+
+**Finalizing Setup**
+Since this plugin is installed in the opt (optional) directory, it will not load automatically. Add the following line to your .vimrc (Unix) or _vimrc (Windows):
 
 ```viml
 packadd number-puzzle
 ```
 
-You can also install and manage this plugin using any one of the Vim plugin managers (dein.vim, pathogen, vam, vim-plug, volt, Vundle, etc.).
+After adding the line, restart Vim and run the following command to enable the help documentation:
+
+```viml
+:helptags ALL
+```
+
+### Plugin Manager Installation
+
+If using a plugin manager like vim-plug, add to your .vimrc or init.vim:
+
+   ```viml
+   Plug 'path/to/number-puzzle'
+   ```
+
+Then run `:PlugInstall` and `:helptags ALL`
+
+For other plugin managers (Vundle, Pathogen, etc.), follow their standard
+installation procedures for local plugins.
 
 ## Usage
 
