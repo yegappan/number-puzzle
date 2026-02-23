@@ -1,55 +1,42 @@
-# Number Slide Puzzle for Vim9
+# Number Slide Puzzle in Vim9script
 
-A classic 15-puzzle sliding tile game implemented as a Vim9 plugin, displayed in a popup window.
+A classic 15-puzzle sliding tile game where you arrange numbered tiles in order by sliding them into an empty space. Written in Vim9script to showcase classes, interfaces, type aliases, and guaranteed solvable puzzle generation.
 
-## Overview
+## Features
 
-The Number Slide Puzzle plugin provides an interactive sliding puzzle game directly in Vim. The puzzle appears in a centered popup window with a 4×4 grid containing numbered tiles from 1-15 and one empty space. The goal is to arrange the tiles in numerical order by sliding them into the empty space.
-
-### Features
-
-- **Modern Vim9 Implementation**: Built with Vim9 script features including classes, interfaces, enums, and type annotations
-- **Highly Modular Architecture**: Clean separation of concerns across multiple specialized modules
-- **Popup Window Interface**: Non-intrusive gameplay in a centered popup window
-- **Unicode Box Drawing**: Clear visual separation between tiles using Unicode characters
-- **Guaranteed Solvable**: Every generated puzzle is verified to be solvable using mathematical validation
-- **Keyboard Controls**: Intuitive arrow key navigation plus quick reset and help
+- **Guaranteed Solvable**: Every puzzle is verified solvable using mathematical validation
+- **4×4 Grid**: 15 numbered tiles plus one empty space
+- **Arrow Key Controls**: Intuitive tile movement
+- **Popup Window UI**: Non-intrusive gameplay in a centered window
+- **Puzzle Reset**: Generate new scrambled configurations
+- **Modern Vim9script**: Demonstrates OOP principles and modular design
 
 ## Requirements
 
-- **Vim 9.0 or later** with Vim9 script support
-- This plugin is **Vim-only** and does not support Neovim
+- Vim 9.0 or later with Vim9script support
+- **NOT compatible with Neovim** (requires Vim9-specific features)
 
 ## Installation
 
 ### Using Git
-If you have git installed, run the following command in your terminal:
 
 **Unix/Linux/macOS:**
-
 ```bash
 git clone https://github.com/yegappan/number-puzzle.git ~/.vim/pack/downloads/opt/number-puzzle
 ```
-**Windows (cmd.exe):**
 
+**Windows (cmd.exe):**
 ```cmd
 git clone https://github.com/yegappan/number-puzzle.git %USERPROFILE%\vimfiles\pack\downloads\opt\number-puzzle
 ```
 
 ### Using a ZIP file
-If you prefer not to use Git:
 
 **Unix/Linux/macOS:**
-
-Create the destination directory:
-
 ```bash
 mkdir -p ~/.vim/pack/downloads/opt/
 ```
-
-Download the plugin ZIP file from GitHub and extract its contents into the directory created above.
-
-*Note:* GitHub usually names the extracted folder number-puzzle-main. Rename it to number-puzzle so the final path looks like this:
+Download the ZIP file from GitHub and extract it into the directory above. Rename the extracted folder (usually number-puzzle-main) to `number-puzzle` so the final path matches:
 
 ```plaintext
 ~/.vim/pack/downloads/opt/number-puzzle/
@@ -59,16 +46,10 @@ Download the plugin ZIP file from GitHub and extract its contents into the direc
 ```
 
 **Windows (cmd.exe):**
-
-Create the destination directory:
-
 ```cmd
 if not exist "%USERPROFILE%\vimfiles\pack\downloads\opt" mkdir "%USERPROFILE%\vimfiles\pack\downloads\opt"
 ```
-
-Download the plugin ZIP file from GitHub and extract its contents into that directory.
-
-*Note:* Rename the extracted folder (usually number-puzzle-main) to number-puzzle so the path matches:
+Download the ZIP file from GitHub and extract it into the directory above. Rename the extracted folder (usually number-puzzle-main) to `number-puzzle` so the final path matches:
 
 ```plaintext
 %USERPROFILE%\vimfiles\pack\downloads\opt\number-puzzle\
@@ -78,42 +59,36 @@ Download the plugin ZIP file from GitHub and extract its contents into that dire
 ```
 
 ### Finalizing Setup
-Since this plugin is installed in the opt (optional) directory, it will not load automatically. Add the following line to your .vimrc (Unix) or _vimrc (Windows):
 
+Since the plugin is in the `opt` directory, add this to your `.vimrc` (Unix) or `_vimrc` (Windows):
 ```viml
 packadd number-puzzle
 ```
 
-After adding the line, restart Vim and run the following command to enable the help documentation:
-
+Then restart Vim and run:
 ```viml
 :helptags ALL
 ```
 
 ### Plugin Manager Installation
 
-If using a plugin manager like vim-plug, add to your .vimrc or init.vim:
+If using vim-plug, add to your config:
+```viml
+Plug 'path/to/number-puzzle'
+```
+Then run `:PlugInstall` and `:helptags ALL`.
 
-   ```viml
-   Plug 'path/to/number-puzzle'
-   ```
-
-Then run `:PlugInstall` and `:helptags ALL`
-
-For other plugin managers (Vundle, Pathogen, etc.), follow their standard
-installation procedures for local plugins.
+For other plugin managers, follow their standard procedure for local plugins.
 
 ## Usage
 
-### Commands
+### Starting the Game
 
-| Command | Description |
-|---------|-------------|
-| `:NumberPuzzle` | Start a new game or reset if already open |
+```vim
+:NumberPuzzle
+```
 
-### Keyboard Controls
-
-When the puzzle popup is active:
+### Controls
 
 | Key | Action |
 |-----|--------|
@@ -121,101 +96,49 @@ When the puzzle popup is active:
 | `↓` | Move tile above empty space downward |
 | `←` | Move tile right of empty space leftward |
 | `→` | Move tile left of empty space rightward |
-| `r` | Reset puzzle with new scrambled configuration |
-| `q` | Quit and close the puzzle |
+| `r` | Reset with new scrambled configuration |
+| `q` | Quit and close puzzle |
 | `?` | Show help message |
 
-**Note:** Arrow keys move tiles *into* the empty space, not the empty space itself.
+### How to Play
 
-## How to Play
+**Objective**: Arrange tiles in order (1-15) with the empty space in the bottom-right corner:
 
-1. **Start the game:**
-   ```vim
-   :NumberPuzzle
-   ```
-
-2. **Objective:**
-   Arrange the numbered tiles in order from 1 to 15, reading left to right, top to bottom, with the empty space in the bottom-right corner:
-
-   ```
-    1 │  2 │  3 │  4
-   ───┼────┼────┼────
-    5 │  6 │  7 │  8
-   ───┼────┼────┼────
-    9 │ 10 │ 11 │ 12
-   ───┼────┼────┼────
-   13 │ 14 │ 15 │
-   ```
-
-3. **Move tiles:**
-   - Use arrow keys to slide tiles adjacent to the empty space
-   - Only tiles directly next to the empty space (horizontally or vertically) can be moved
-   - Press the arrow key pointing from the empty space toward the tile you want to move
-
-4. **Strategy tips:**
-   - Plan multiple moves ahead to avoid getting stuck
-   - Try solving row by row, starting from the top
-   - The last two tiles in each row often require special techniques
-   - All generated puzzles are guaranteed to be solvable!
-
-5. **Win:**
-   When you solve the puzzle, you'll see: "Solved! Press r to reset or q to quit."
-
-## Documentation
-
-Full documentation is available within Vim after installation:
-
-```vim
-:help number-puzzle
+```
+ 1 │  2 │  3 │  4
+───┼────┼────┼────
+ 5 │  6 │  7 │  8
+───┼────┼────┼────
+ 9 │ 10 │ 11 │ 12
+───┼────┼────┼────
+13 │ 14 │ 15 │
 ```
 
-Browse available help topics:
-- `:help number-puzzle-introduction`
-- `:help number-puzzle-installation`
-- `:help number-puzzle-commands`
-- `:help number-puzzle-keys`
-- `:help number-puzzle-how-to-play`
+**Strategy Tips**:
+- Plan multiple moves ahead
+- Try solving row by row from the top
+- The last two tiles in each row often require special techniques
+- Every puzzle is guaranteed solvable!
 
-## Technical Details
+### Game Rules
 
-### Architecture
+- Only tiles adjacent to the empty space (horizontally or vertically) can move
+- Tiles slide into the empty space
+- Press arrow keys pointing from the empty space toward the tile to move it
+- Win when all tiles are in numerical order
 
-The plugin is organized into highly modular components:
+## Vim9 Language Features Demonstrated
 
-- **constants.vim**: Centralized constant definitions (EMPTY, drawing characters, defaults)
-- **types.vim**: Type aliases (`Board`, `Pos`, `Index`, `CellValue`) and enums (`Dir`, `GameState`)
-- **position.vim**: Position and index calculations, adjacency checks, movement logic
-- **renderer.vim**: Board-to-display conversion and rendering logic
-- **board.vim**: `Board` class encapsulating board state, generation, and validation
-- **game.vim**: `Puzzle` class managing game state and move logic
-- **view.vim**: `IPuzzleView` interface and `PopupView` class for UI rendering
-- **numberpuzzle.vim**: Main coordinator for game initialization and key handling
-
-### Vim9 Script Features
-
-This plugin showcases modern Vim9 script features:
-
-- **Classes**: Object-oriented design with `Board`, `Puzzle`, and `PopupView` classes
-- **Interfaces**: `IPuzzleView` interface for view abstraction
-- **Enums**: Type-safe enums for `Dir` (movement directions) and `GameState`
-- **Type Aliases**: Custom types like `Board`, `Pos`, `Index`, and `CellValue` for clarity
-- **Type Annotations**: Full type safety throughout with explicit type declarations
-- **Export System**: Clean module separation with explicit imports and exports
+- **Classes**: `Board` class for state management, `Puzzle` class for game logic, `PopupView` for UI
+- **Interfaces**: `IPuzzleView` interface for abstract view layer
+- **Enums**: `Dir` for movement directions, `GameState` for game states
+- **Type Aliases**: `Board`, `Pos`, `Index`, `CellValue` for semantic clarity
+- **Type Checking**: Full type annotations on all parameters and returns
+- **Modular Architecture**: Separation of concerns across specialized modules
 - **Popup Windows**: Modern UI using Vim's popup window API
-- **Constants**: Centralized constant definitions for maintainability
+- **Algorithm**: Fisher-Yates shuffle with solvability checking using inversion count
 
-### Algorithm
+## License
 
-The puzzle generation algorithm ensures solvability by checking the inversion count and empty tile position according to the mathematical properties of the 15-puzzle. The Fisher-Yates shuffle algorithm provides fair randomization while maintaining solvability guarantees.
+This plugin is licensed under the MIT License. See the LICENSE file in the repository for details.
 
-
-## Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests.
-
-## Credits
-
-The Number Slide Puzzle (also known as the 15-puzzle) is a classic sliding puzzle invented in the 1870s.
-All the files in this repository were generated by GitHub Copilot.
-
-This Vim9 implementation demonstrates modern Vimscript capabilities while providing an enjoyable puzzle experience.
