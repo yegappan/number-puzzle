@@ -77,7 +77,7 @@ Download the plugin ZIP file from GitHub and extract its contents into that dire
 └── doc/
 ```
 
-**Finalizing Setup**
+### Finalizing Setup
 Since this plugin is installed in the opt (optional) directory, it will not load automatically. Add the following line to your .vimrc (Unix) or _vimrc (Windows):
 
 ```viml
