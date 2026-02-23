@@ -111,14 +111,14 @@ installation procedures for local plugins.
 4. CONTROLS                                        *number-puzzle-controls*
 
 Movement and Tile Selection:
-  <Up>            Move a tile from below the empty space upward
-  <Down>          Move a tile from above the empty space downward
-  <Left>          Move a tile from the right of empty space leftward
-  <Right>         Move a tile from the left of empty space rightward
+  <Up> or k       Move a tile from below the empty space upward
+  <Down> or j     Move a tile from above the empty space downward
+  <Left> or h     Move a tile from the right of empty space leftward
+  <Right> or l    Move a tile from the left of empty space rightward
 
-Note: The arrow keys move tiles INTO the empty space, not the empty space
-itself. For example, pressing <Up> moves the tile below the empty space up
-into the empty space.
+Note: Arrow keys and hjkl keys move tiles INTO the empty space, not the empty
+space itself. For example, pressing <Up> or 'k' moves the tile below the empty
+space up into the empty space.
 
 Game Control:
   r               Reset the puzzle with a new scrambled configuration

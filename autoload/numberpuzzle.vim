@@ -75,7 +75,7 @@ enddef
 
 # Display help message.
 export def Help()
-  echo "Number Puzzle: use arrow keys to move tiles; press r to reset or q to close."
+  echo "Number Puzzle: use arrow keys (↑↓←→) or hjkl to move tiles; press r to reset or q to close."
 enddef
 
 
@@ -106,13 +106,13 @@ def PopupFilter(id: number, key: string): number
     return 0
   endif
 
-  if key ==# "\<Up>"
+  if key ==# "\<Up>" || key ==# 'k'
     Move(types.Dir.Up)
-  elseif key ==# "\<Down>"
+  elseif key ==# "\<Down>" || key ==# 'j'
     Move(types.Dir.Down)
-  elseif key ==# "\<Left>"
+  elseif key ==# "\<Left>" || key ==# 'h'
     Move(types.Dir.Left)
-  elseif key ==# "\<Right>"
+  elseif key ==# "\<Right>" || key ==# 'l'
     Move(types.Dir.Right)
   elseif key ==# 'r' || key ==# 'R'
     Reset()

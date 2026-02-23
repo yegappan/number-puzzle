@@ -92,10 +92,10 @@ For other plugin managers, follow their standard procedure for local plugins.
 
 | Key | Action |
 |-----|--------|
-| `↑` | Move tile below empty space upward |
-| `↓` | Move tile above empty space downward |
-| `←` | Move tile right of empty space leftward |
-| `→` | Move tile left of empty space rightward |
+| `↑` or `k` | Move tile below empty space upward |
+| `↓` or `j` | Move tile above empty space downward |
+| `←` or `h` | Move tile right of empty space leftward |
+| `→` or `l` | Move tile left of empty space rightward |
 | `r` | Reset with new scrambled configuration |
 | `q` | Quit and close puzzle |
 | `?` | Show help message |
