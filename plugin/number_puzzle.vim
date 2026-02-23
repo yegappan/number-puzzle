@@ -1,14 +1,14 @@
 vim9script
-
-# Number Slide Puzzle plugin for Vim9.
-# Provides :NumberPuzzleStart to open a puzzle buffer and play.
+# Number Puzzle (15-Puzzle) Game Plugin for Vim9
+# Sliding puzzle - arrange numbered tiles in correct order
+# Requires: Vim 9.0+
 
 if exists('g:loaded_number_puzzle')
   finish
 endif
-
-import autoload '../autoload/numberpuzzle.vim'
-
 g:loaded_number_puzzle = 1
 
-command! NumberPuzzle numberpuzzle.Start()
+import autoload '../autoload/numberpuzzle.vim' as NumberPuzzle
+
+# Command to start the game
+command! NumberPuzzle call NumberPuzzle.Start()
